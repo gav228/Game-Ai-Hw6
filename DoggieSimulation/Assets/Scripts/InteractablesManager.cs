@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class InteractablesManager : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class InteractablesManager : MonoBehaviour
     public static InteractablesManager instance;
     public Text timetext;
     public Text logtext;
+    public bool started;
+    public int foodBowl;
 
     private void Awake()
     {
-        hour = 0;
+        started = false;
+        hour = 7;
         minute = 0;
         waiting = 0;
         instance = this;
@@ -24,42 +28,71 @@ public class InteractablesManager : MonoBehaviour
 
     void Update()
     {
-        if (hour == 0)
+        if (started == true)
         {
-            timetext.text = string.Format("12:{0:00} AM", minute);
-        }
-        if(hour > 0 && hour < 12)
+            if (waiting > 4)
+            {
+                minute += 1;
+                waiting = 0;
+            }
+            if (minute >= 60)
+            {
+                hour += 1;
+                minute = 0;
+            }
+            if (hour == 0)
+            {
+                timetext.text = string.Format("12:{0:00} AM", minute);
+            }
+            if (hour > 0 && hour < 12)
+            {
+                timetext.text = string.Format("{0}:{1:00} AM", hour, minute);
+            }
+            if (hour == 12)
+            {
+                timetext.text = string.Format("12:{0:00} PM", minute);
+            }
+            if (hour > 12)
+            {
+                timetext.text = string.Format("{0}:{1:00} PM", hour - 12, minute);
+            }
+            
+            if (hour == 24)
+            {
+                hour = 0;
+            }
+            waiting += 1;
+        } else
         {
-            timetext.text = string.Format("{0}:{1:00} AM", hour, minute);
+            if (Input.GetKeyDown("space"))
+            {
+                started = true;
+            }
         }
-        if (hour == 12)
-        {
-            timetext.text = string.Format("12:{0:00} PM", minute);
-        }
-        if (hour > 12)
-        {
-            timetext.text = string.Format("{0}:{1:00} PM", hour-12, minute);
-        }
-        if (minute >= 60)
-        {
-            hour += 1;
-            minute = 0;
-        }
-        if (waiting > 4)
-        {
-            minute += 1;
-            waiting = 0;
-        }
-        if(hour == 24)
-        {
-            hour = 0;
-        }
-        waiting += 1;
     }
 
     public void AddToLog(string message)
     {
+        string[] lines = logtext.text.Split('\n').Skip(1).ToArray();
+        logtext.text = string.Join("\n", lines);
+        
 
+        if (hour == 0)
+        {
+            logtext.text += string.Format("12:{0:00} AM", minute) + " - " + message;
+        }
+        if (hour > 0 && hour < 12)
+        {
+            logtext.text += string.Format("{0}:{1:00} AM", hour, minute) + " - " + message;
+        }
+        if (hour == 12)
+        {
+            logtext.text += string.Format("12:{0:00} PM", minute) + " - " + message;
+        }
+        if (hour > 12)
+        {
+            logtext.text += string.Format("{0}:{1:00} PM", hour - 12, minute) + " - "+ message;
+        }
     }
 
     

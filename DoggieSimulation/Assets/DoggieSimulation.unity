@@ -273,7 +273,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 12:00 AM
+  m_Text: 7:00 AM
 --- !u!222 &135774745
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -835,6 +835,8 @@ MonoBehaviour:
   waiting: 0
   timetext: {fileID: 0}
   logtext: {fileID: 0}
+  started: 0
+  foodBowl: 0
 --- !u!4 &1552268702
 Transform:
   m_ObjectHideFlags: 0
@@ -883,8 +885,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 0}
-  m_SizeDelta: {x: 1000, y: 450}
+  m_AnchoredPosition: {x: 100, y: 0}
+  m_SizeDelta: {x: 1500, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1916561853
 MonoBehaviour:
@@ -919,11 +921,23 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: "\u2022 Welcome to the doggie simulation\n\u2022 The Dog's responses to
-    your actions will appear here\n\u2022 Press keys to interact with your dog\n\u2022
-    The Log keeps track of the last few responses\n\u2022 Each response will remove
-    the oldest\n\u2022 The dog will get hungry and tired as time goes on\n\u2022 Press
-    Space bar to begin the simulation\n\u2022 Have Fun!\n"
+  m_Text: '7:00 AM - Welcome to the doggie simulation
+
+    7:00 AM - The Dog''s responses to your actions will appear here
+
+    7:00 AM - Press keys to interact with your dog
+
+    7:00 AM - The Log keeps track of the last few responses
+
+    7:00 AM - Each response will remove the oldest
+
+    7:00 AM - The dog will get hungry and tired as time goes on
+
+    7:00 AM - Press Space bar to begin the simulation
+
+    7:00 AM - Have Fun! (The dog''s name is diego)
+
+'
 --- !u!222 &1916561854
 CanvasRenderer:
   m_ObjectHideFlags: 0

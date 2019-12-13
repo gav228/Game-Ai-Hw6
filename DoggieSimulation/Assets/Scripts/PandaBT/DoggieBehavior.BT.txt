@@ -1,2 +1,26 @@
 tree("Root")
-	Succeed
+	fallback
+		tree "Hungry"
+		tree "Tired"
+		tree "Lonely"
+		tree "Sad"
+		tree "Bored"
+		tree "Alert"
+		tree "Sleeping"
+		tree "Walking"
+tree("Hungry")
+	EatFood
+tree("Tired")
+	Rest
+tree("Lonely")
+	Whimper
+tree("Sad")
+	Whimper
+tree("Bored")
+	Whimper
+tree("Alert")
+	Bark
+tree("Sleeping")
+	Sleeping
+tree("Walking")
+	Walking
