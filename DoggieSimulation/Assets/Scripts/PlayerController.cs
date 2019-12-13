@@ -10,11 +10,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown("f"))
         {
-            print("Loading up the dog dish with food");
+            InteractablesManager.instance.logtext.text += "• Filled up doggy bowl with food\n";
         }
         if (Input.GetKeyDown("t"))
         {
-            print("Giving the dog a treat");
+            string[] lines = InteractablesManager.instance.logtext.text.Split('\n');
+
+            InteractablesManager.instance.logtext.text = string.Join("\n", lines);
+            InteractablesManager.instance.logtext.text += "• Giving the dog a treat\n";
         }
         if (Input.GetKeyDown("k"))
         {
