@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
                     InteractablesManager.instance.work = true;
                 } else
                 {
-                    InteractablesManager.instance.AddToLog("You're already a work\n");
+                    InteractablesManager.instance.AddToLog("You're already at work\n");
                 }
             }
             if (Input.GetKeyDown("a"))
