@@ -33,28 +33,59 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown("t"))
             {
-                InteractablesManager.instance.AddToLog("Giving diego a treat\n");
-                InteractablesManager.instance.treats += 1;
+                if (InteractablesManager.instance.work == false)
+                {
+                    InteractablesManager.instance.AddToLog("Giving diego a treat\n");
+                    InteractablesManager.instance.treats += 1;
+                }
+                else
+                {
+                    InteractablesManager.instance.AddToLog("You cant give a treat, you're at work! \n");
+                }
             }
             if (Input.GetKeyDown("k"))
             {
-                InteractablesManager.instance.AddToLog("Throwing a stick to diego \n");
-                InteractablesManager.instance.playing = true;
+                if (InteractablesManager.instance.work == false)
+                {
+                    InteractablesManager.instance.AddToLog("Throwing a stick to diego \n");
+                    InteractablesManager.instance.playing = true;
+                } else {
+                    InteractablesManager.instance.AddToLog("You cant throw a sitck, you're at work! \n");
+                }
             }
             if (Input.GetKeyDown("p"))
             {
-                InteractablesManager.instance.AddToLog("Petting diego \n");
-                InteractablesManager.instance.petting = true;
+                if (InteractablesManager.instance.work == false)
+                {
+                    InteractablesManager.instance.AddToLog("Petting diego \n");
+                    InteractablesManager.instance.petting = true;
+                } else
+                {
+                    InteractablesManager.instance.AddToLog("You cant pet diego you're at work! \n");
+                }
             }
             if (Input.GetKeyDown("b"))
             {
-                InteractablesManager.instance.AddToLog("Belly rubbing diego \n");
-                InteractablesManager.instance.petting = true;
+                if (InteractablesManager.instance.work == false)
+                {
+                    InteractablesManager.instance.AddToLog("Belly rubbing diego \n");
+                    InteractablesManager.instance.petting = true;
+                } else
+                {
+                    InteractablesManager.instance.AddToLog("You cant rub his belly, you're at work!\n");
+                }
             }
             if (Input.GetKeyDown("w"))
             {
-                InteractablesManager.instance.AddToLog("Going for a walk \n");
-                InteractablesManager.instance.walk = true;
+                if (InteractablesManager.instance.work == false)
+                {
+                    InteractablesManager.instance.AddToLog("Going for a walk \n");
+                    InteractablesManager.instance.walk = true;
+                }
+                else
+                {
+                    InteractablesManager.instance.AddToLog("You cant go for a walk, you're at work!\n");
+                }
             }
             if (Input.GetKeyDown("l"))
             {
@@ -62,13 +93,25 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown("g"))
             {
-                InteractablesManager.instance.AddToLog("Going to work \n");
-                InteractablesManager.instance.work = true;
+                if (InteractablesManager.instance.work == false)
+                {
+                    InteractablesManager.instance.AddToLog("Going to work \n");
+                    InteractablesManager.instance.work = true;
+                } else
+                {
+                    InteractablesManager.instance.AddToLog("You're already a work\n");
+                }
             }
             if (Input.GetKeyDown("a"))
             {
-                InteractablesManager.instance.AddToLog("Ariving from work \n");
-                InteractablesManager.instance.work = false;
+                if (InteractablesManager.instance.work == true)
+                {
+                    InteractablesManager.instance.AddToLog("Ariving from work \n");
+                    InteractablesManager.instance.work = false;
+                } else
+                {
+                    InteractablesManager.instance.AddToLog("You're already home\n");
+                }
             }
             if (Input.GetKeyDown("i"))
             {
