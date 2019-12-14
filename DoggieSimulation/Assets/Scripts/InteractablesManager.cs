@@ -21,6 +21,7 @@ public class InteractablesManager : MonoBehaviour
     public bool playing;
     public bool sound;
     public int treats;
+    public bool petting;
 
     private void Awake() {
         treats = 0;
@@ -35,6 +36,7 @@ public class InteractablesManager : MonoBehaviour
         instance = this;
         timetext = GameObject.Find("TimeText").GetComponent<Text>();
         logtext = GameObject.Find("LogContent").GetComponent<Text>();
+        petting = false;
     }
 
     void Update()

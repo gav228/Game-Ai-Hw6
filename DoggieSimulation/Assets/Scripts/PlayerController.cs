@@ -14,12 +14,20 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown("f"))
             {
-                if (InteractablesManager.instance.foodBowl != 1) {
-                    InteractablesManager.instance.AddToLog("Filled up doggy bowl with food\n");
-                    InteractablesManager.instance.foodBowl = 1;
+                if (InteractablesManager.instance.work == false)
+                {
+                    if (InteractablesManager.instance.foodBowl != 1)
+                    {
+                        InteractablesManager.instance.AddToLog("Filled up doggy bowl with food\n");
+                        InteractablesManager.instance.foodBowl = 1;
+                    }
+                    else
+                    {
+                        InteractablesManager.instance.AddToLog("The food bowl is already full, do something else\n");
+                    }
                 } else
                 {
-                    InteractablesManager.instance.AddToLog("The food bowl is already full, do something else\n");
+                    InteractablesManager.instance.AddToLog("You cant add food, you're at work! \n");
                 }
                 
             }
@@ -31,14 +39,17 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown("k"))
             {
                 InteractablesManager.instance.AddToLog("Throwing a stick to diego \n");
+                InteractablesManager.instance.playing = true;
             }
             if (Input.GetKeyDown("p"))
             {
                 InteractablesManager.instance.AddToLog("Petting diego \n");
+                InteractablesManager.instance.petting = true;
             }
             if (Input.GetKeyDown("b"))
             {
                 InteractablesManager.instance.AddToLog("Belly rubbing diego \n");
+                InteractablesManager.instance.petting = true;
             }
             if (Input.GetKeyDown("w"))
             {

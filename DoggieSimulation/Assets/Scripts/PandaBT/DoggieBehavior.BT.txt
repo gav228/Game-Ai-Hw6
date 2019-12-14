@@ -4,7 +4,6 @@ tree("Root")
 		tree "Tired"
 		tree "Lonely"
 		tree "Sad"
-		tree "Bored"
 		tree "Alert"
 		tree "Sleeping"
 		tree "Walking"
@@ -14,10 +13,8 @@ tree("Hungry")
 tree("Tired")
 	Rest
 tree("Lonely")
-	Whimper
+	Lonely
 tree("Sad")
-	Whimper
-tree("Bored")
 	Whimper
 tree("Alert")
 	Bark

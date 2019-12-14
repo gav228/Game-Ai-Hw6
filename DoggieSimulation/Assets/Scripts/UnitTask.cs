@@ -33,6 +33,7 @@ public class UnitTask : MonoBehaviour
         bathroom = 500;
         sleeping = false;
         update_delay = 0;
+        lonelyness = 0;
     }
 
     public void Update()
@@ -45,6 +46,10 @@ public class UnitTask : MonoBehaviour
             {
                 boredom += 1;
                 happyness -= 1;
+            }
+            if (InteractablesManager.instance.work == true)
+            {
+                lonelyness += 1;
             }
             exhaustion += 1;
             update_delay += 1;
@@ -97,7 +102,7 @@ public class UnitTask : MonoBehaviour
     [Task]
     public void Rest()
     {
-        if (exhaustion > 1200 && InteractablesManager.instance.hour < 21 && InteractablesManager.instance.hour > 7 && InteractablesManager.instance.walk == false)
+        if (exhaustion > 1500 && InteractablesManager.instance.hour < 21 && InteractablesManager.instance.hour > 7 && InteractablesManager.instance.walk == false)
         {
             InteractablesManager.instance.AddToLog("Diego is taking a short nap\n");
             exhaustion = 0;
@@ -134,6 +139,42 @@ public class UnitTask : MonoBehaviour
         
     }
 
+    [Task]
+    public void Lonely()
+    {
+        if (lonelyness > 400 && InteractablesManager.instance.petting == false)
+        {
+            if (update_delay > 200 && InteractablesManager.instance.work == false)
+            {
+                InteractablesManager.instance.AddToLog("Diego is nuzzling your leg\n");
+                update_delay = 0;
+            }
+            Task.current.Fail();
+        } else if (InteractablesManager.instance.petting == true && bellyBoredom < 4)
+        {
+            InteractablesManager.instance.AddToLog("Diego smiles happily at the contact\n");
+            update_delay = 0;
+            lonelyness = 0;
+            bellyBoredom += 1;
+            InteractablesManager.instance.petting = false;
+            Task.current.Succeed();
+        }
+        else if (InteractablesManager.instance.petting == true && bellyBoredom >= 4)
+        {
+            InteractablesManager.instance.AddToLog("Diego is bored of this\n");
+            bellyBoredom += 1;
+            InteractablesManager.instance.petting = false;
+            Task.current.Succeed();
+        } else
+        {
+            if (update_delay > 200)
+            {
+                bellyBoredom-= 1;
+                update_delay = 0;
+            }
+            Task.current.Fail();
+        }
+    }
 
     [Task]
     public void Whimper()
@@ -149,9 +190,33 @@ public class UnitTask : MonoBehaviour
     [Task]
     public void Playing()
     {
-        if(boredom > 600 && InteractablesManager.instance.playing == false )
+        if(boredom > 800 && InteractablesManager.instance.playing == false )
         {
-            InteractablesManager.instance.AddToLog("Diego is biting at your leg, looks like he wants to play\n");
+            if (update_delay > 200 && InteractablesManager.instance.work == false)
+            {
+                InteractablesManager.instance.AddToLog("Diego is biting at your leg, looks like he wants to play\n");
+                update_delay = 0;
+            }
+            Task.current.Fail();
+        } else if (InteractablesManager.instance.playing == true && stickBoredom < 4)
+        {
+            InteractablesManager.instance.AddToLog("Diego brings the stick back to you happily\n");
+            stickBoredom += 1;
+            boredom -= 1000;
+            InteractablesManager.instance.playing = false;
+            Task.current.Succeed();
+        } else if(InteractablesManager.instance.playing == true && stickBoredom >= 4)
+        {
+            InteractablesManager.instance.AddToLog("Diego is bored of fetching the stick\n");
+            InteractablesManager.instance.playing = false;
+            Task.current.Fail();
+        } else
+        {
+            if(update_delay > 200)
+            {
+                stickBoredom -= 1;
+                update_delay = 0;
+            }
             Task.current.Fail();
         }
     }
@@ -159,7 +224,7 @@ public class UnitTask : MonoBehaviour
     [Task]
     public void Sleeping()
     {
-        if (exhaustion > 1200 && InteractablesManager.instance.hour > 21 && InteractablesManager.instance.hour < 7 && sleeping == false)
+        if (exhaustion > 1200 && InteractablesManager.instance.hour > 21 || InteractablesManager.instance.hour < 7 && sleeping == false)
         {
             InteractablesManager.instance.AddToLog("Diego is sleeping\n");
             exhaustion -= 900;
@@ -173,6 +238,7 @@ public class UnitTask : MonoBehaviour
             Task.current.Fail();
         } else if (sleeping == true)
         {
+            update_delay = 0;
             Task.current.Succeed();
         } else
         {
