@@ -8,6 +8,7 @@ tree("Root")
 		tree "Alert"
 		tree "Sleeping"
 		tree "Walking"
+		tree "Playing"
 tree("Hungry")
 	EatFood
 tree("Tired")
@@ -24,3 +25,5 @@ tree("Sleeping")
 	Sleeping
 tree("Walking")
 	Walking
+tree("Playing")
+	Playing

@@ -14,10 +14,21 @@ public class InteractablesManager : MonoBehaviour
     public Text logtext;
     public bool started;
     public int foodBowl;
+    public bool work;
+    public bool walk;
+    public bool leave;
+    public bool sleeping;
+    public bool playing;
+    public bool sound;
+    public int treats;
 
-    private void Awake()
-    {
+    private void Awake() {
+        treats = 0;
+        sound = false; 
+        playing = false;
         started = false;
+        work = false;
+        walk = false;
         hour = 7;
         minute = 0;
         waiting = 0;
@@ -34,6 +45,7 @@ public class InteractablesManager : MonoBehaviour
             {
                 minute += 1;
                 waiting = 0;
+                sound = false;
             }
             if (minute >= 60)
             {

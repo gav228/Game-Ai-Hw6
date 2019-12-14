@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown("f"))
             {
-                if (InteractablesManager.instance.foodBowl != 8) {
+                if (InteractablesManager.instance.foodBowl != 1) {
                     InteractablesManager.instance.AddToLog("Filled up doggy bowl with food\n");
-                    InteractablesManager.instance.foodBowl = 8;
+                    InteractablesManager.instance.foodBowl = 1;
                 } else
                 {
                     InteractablesManager.instance.AddToLog("The food bowl is already full, do something else\n");
@@ -25,51 +25,82 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown("t"))
             {
-                InteractablesManager.instance.AddToLog("Giving the dog a treat\n");
+                InteractablesManager.instance.AddToLog("Giving diego a treat\n");
+                InteractablesManager.instance.treats += 1;
             }
             if (Input.GetKeyDown("k"))
             {
-                print("Throwing a stick");
+                InteractablesManager.instance.AddToLog("Throwing a stick to diego \n");
             }
             if (Input.GetKeyDown("p"))
             {
-                print("Petting the dog");
+                InteractablesManager.instance.AddToLog("Petting diego \n");
             }
             if (Input.GetKeyDown("b"))
             {
-                print("Belly rubbing the dog");
+                InteractablesManager.instance.AddToLog("Belly rubbing diego \n");
             }
             if (Input.GetKeyDown("w"))
             {
-                print("Going for a walk");
+                InteractablesManager.instance.AddToLog("Going for a walk \n");
+                InteractablesManager.instance.walk = true;
             }
             if (Input.GetKeyDown("l"))
             {
-                print("Leaving the dog alone");
+                InteractablesManager.instance.AddToLog("Leaving the dog alone \n");
             }
             if (Input.GetKeyDown("g"))
             {
-                print("Going to work");
+                InteractablesManager.instance.AddToLog("Going to work \n");
+                InteractablesManager.instance.work = true;
             }
             if (Input.GetKeyDown("a"))
             {
-                print("Arriving from work");
+                InteractablesManager.instance.AddToLog("Ariving from work \n");
+                InteractablesManager.instance.work = false;
             }
             if (Input.GetKeyDown("i"))
             {
-                print("Idling");
+                InteractablesManager.instance.AddToLog("Idling \n");
+                InteractablesManager.instance.minute += 15;
+                for (int i = 0; i < 30; i++)
+                {
+                    GameObject.Find("Doggie").GetComponent<UnitTask>().Update();
+                }
+
             }
             if (Input.GetKeyDown("h"))
             {
-                print("Waiting for an hour");
+                InteractablesManager.instance.AddToLog("Waiting for an hour \n");
+                InteractablesManager.instance.hour += 1;
+                for (int i = 0; i < 120; i++)
+                {
+                    GameObject.Find("Doggie").GetComponent<UnitTask>().Update();
+                }
             }
             if (Input.GetKeyDown("d"))
             {
-                print("Starting a new day");
+                InteractablesManager.instance.AddToLog("Starting a new day \n");
+                int difference = 0;
+                if(InteractablesManager.instance.hour >= 7)
+                {
+                    difference = Mathf.Abs(InteractablesManager.instance.hour - 31);
+                } else
+                {
+                    difference = Mathf.Abs(InteractablesManager.instance.hour - 7);
+                }
+                Debug.Log(difference);
+                InteractablesManager.instance.hour = 7;
+                InteractablesManager.instance.minute = 0;
+                for (int i = 0; i < difference * 120; i++)
+                {
+                    GameObject.Find("Doggie").GetComponent<UnitTask>().Update();
+                }
             }
             if (Input.GetKeyDown("s"))
             {
-                print("Making a mysterious sound");
+                InteractablesManager.instance.AddToLog("A mysterious sound was heard \n");
+                InteractablesManager.instance.sound = true;
             }
         }
     }
